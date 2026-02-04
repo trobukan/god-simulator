@@ -14,9 +14,14 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="god simulator"
+config/name="God Simulator"
+config/tags=PackedStringArray("working")
 run/main_scene="uid://d0oli6y0si0dm"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[autoload]
+
+GameEvents="*uid://cl5vuxnbfwtir"
 
 [display]
 
@@ -36,7 +41,12 @@ enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
 2d_physics/layer_2="fogo"
 2d_physics/layer_3="pato"
 
+[physics]
+
+jolt_physics_3d/custom_image_hotspot=Vector2(0, 0)
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

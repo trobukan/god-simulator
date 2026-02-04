@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://chidj0o4ebbun"]
+
+[ext_resource type="Script" uid="uid://ctui3vbuccdu7" path="res://entities/human/human.gd" id="1_pqirf"]
+[ext_resource type="Texture2D" uid="uid://dj1opg5yv7qgg" path="res://entities/human/Sprites/human1.png" id="1_rnvww"]
+[ext_resource type="Texture2D" uid="uid://dtejy3kqt0g8a" path="res://entities/human/Sprites/human2.png" id="2_i6xip"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_caag1"]
+radius = 4.5
+height = 15.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oy178"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rnvww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i6xip")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Human" type="CharacterBody2D" unique_id=1342337215]
+z_index = -99
+scale = Vector2(2, 2)
+script = ExtResource("1_pqirf")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=602873816]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_caag1")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=67730440]
+texture_filter = 3
+sprite_frames = SubResource("SpriteFrames_oy178")
+autoplay = "default"

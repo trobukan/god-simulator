@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c52ysy5x4wic"]
+
+[ext_resource type="Texture2D" uid="uid://cv1gsrwe4mx54" path="res://assets/sprites/hud/hand.png" id="1_8f81w"]
+[ext_resource type="Script" uid="uid://uhw0ych78anv" path="res://scripts/mouse.gd" id="1_a7hef"]
+[ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="3_xa71f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ouscy"]
+
+[node name="Mouse" type="Node2D" unique_id=554030695]
+z_index = 101
+script = ExtResource("1_a7hef")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1589290162]
+position = Vector2(1, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("1_8f81w")
+offset = Vector2(0, -2)
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="." unique_id=140562788]
+
+[node name="Collision" type="CollisionShape2D" parent="Area2D" unique_id=495627911]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_ouscy")
+
+[node name="StateLabel" type="Label" parent="." unique_id=1815812977]
+offset_left = 14.0
+offset_top = 2.0
+offset_right = 53.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("3_xa71f")
+text = "state"
+
+[node name="GrabTimer" type="Timer" parent="." unique_id=318296466]

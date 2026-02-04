@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dbbjslbxyii1a"]
+
+[ext_resource type="Script" uid="uid://c1w2ydj1rpm7w" path="res://scripts/world.gd" id="1_4wyf3"]
+[ext_resource type="Script" uid="uid://cf46qdvfft3mr" path="res://scripts/camera.gd" id="1_rwgxs"]
+[ext_resource type="Script" uid="uid://c7b32b1b3tcb6" path="res://scenes/spawn_entity.gd" id="3_4wyf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btjax"]
+size = Vector2(21, 602)
+
+[node name="World" type="Node2D" unique_id=295249712]
+script = ExtResource("1_4wyf3")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=2084411375]
+anchor_mode = 0
+limit_left = -100
+limit_top = -100
+script = ExtResource("1_rwgxs")
+
+[node name="Field" type="Node2D" parent="." unique_id=2038235087]
+
+[node name="ColorRect" type="ColorRect" parent="Field" unique_id=366597047]
+z_index = -100
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 640.0
+offset_bottom = 640.0
+pivot_offset = Vector2(-6, 0)
+mouse_filter = 1
+color = Color(0.298039, 0.537255, 0.298039, 1)
+
+[node name="Colliders" type="Node2D" parent="." unique_id=2112958180]
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Colliders" unique_id=830008901]
+position = Vector2(-10, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D" unique_id=1034026510]
+position = Vector2(0.5, 291)
+shape = SubResource("RectangleShape2D_btjax")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Colliders" unique_id=1301382587]
+position = Vector2(615, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D2" unique_id=787542169]
+position = Vector2(0.5, 291)
+shape = SubResource("RectangleShape2D_btjax")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Colliders" unique_id=8969258]
+position = Vector2(593, -10)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D3" unique_id=1971403154]
+position = Vector2(0.5, 291)
+shape = SubResource("RectangleShape2D_btjax")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Colliders" unique_id=1367087644]
+position = Vector2(595, 610)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D4" unique_id=415449161]
+position = Vector2(0.5, 291)
+shape = SubResource("RectangleShape2D_btjax")
+
+[node name="SpawnEntity" type="Node2D" parent="." unique_id=2123040707]
+script = ExtResource("3_4wyf3")
