@@ -19,6 +19,9 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	state.update(delta)
+
+func _physics_process(delta: float) -> void:
+	state.physics_update(delta)
 	
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
 	if not has_node(target_state_path):
