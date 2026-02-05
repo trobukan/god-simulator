@@ -1,51 +1,79 @@
 extends CharacterBody2D
 
-var dirx = [-10,10,0,0,0,0]
-var diry = [-10,10,0,0,0,0]
+var rotate_death: bool = false
+var in_panic: bool = false
 
+@export var speed: float = 90.0
+@export var panic_speed:float = 210.0
+@export var friction: float = 0.05 
+@export var tremor_intecity: float = 2.0
 
-var raio = null
-var rotate = false
+func _ready() -> void:
+	add_to_group("mobs")
 
-func _physics_process(delta):
-	if rotate == true:
-		rotation_degrees += 10
-	flip()
+func _physics_process(delta: float) -> void:
+
+	if in_panic:
+		$AnimatedSprite2D.offset = Vector2(#EFEITO DE TREMER ENQUAANTO PEGA FOGO
+			randf_range(-tremor_intecity, tremor_intecity),
+			randf_range(-tremor_intecity, tremor_intecity))
+	else:
+		velocity = velocity.lerp(Vector2.ZERO, friction)
+	velocity = velocity.lerp(Vector2.ZERO, friction)
+	_handle_animation()
 	move_and_slide()
 
-func flip():
-	if velocity.x <0:
-		$AnimatedSprite2D.flip_h = true
-	else:
-		$AnimatedSprite2D.flip_h = false
-	if velocity:
+func _handle_animation() -> void:
+	if velocity.length() > 0.1:
 		$AnimatedSprite2D.play("default")
+		$AnimatedSprite2D.flip_h = velocity.x < 0
 	else:
 		$AnimatedSprite2D.stop()
 
-func _on_timer_timeout():
-	randomize()
-	var DIRECTIONx = dirx[randi()% dirx.size()]
-	var DIRECTIONy = diry[randi()% diry.size()]
-	var final_dirx = DIRECTIONx
-	var final_diry = DIRECTIONy
-	velocity.x = final_dirx
-	velocity.y = final_diry
+func _on_timer_timeout() -> void:
+	_handle_walk()
 
-func kill():
-	queue_free()
+func _handle_walk():
+	var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	if randf() < 0.2:
+		velocity = Vector2.ZERO
+	else:
+		velocity = random_direction * speed
+	if in_panic:
+		velocity = random_direction * panic_speed
+		$Timer.wait_time = 0.3
+	if not in_panic:
+		velocity = velocity.lerp(Vector2.ZERO, friction)
+
+func _on_area_2d_porco_area_entered(area: Area2D) -> void:
+	print(area.name)
+	
+	if area.is_in_group("fire") or area.get_parent().has_method("_burn_die") and area.get_parent().in_panic:
+		_start_fire()
+	
+	if area.name == "Raio" or area.is_in_group("lightning"):
+		#(Knockback)
+		var push_dir = (global_position - area.global_position).normalized()
+		velocity = push_dir * 700
+		_knlockback_effect()
+		_burn_die()
+
+func _knlockback_effect():
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(2.5, 2.5), 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 
-func _on_area_2d_porco_area_entered(area):
-	if area.name == "Raio":
-		raio = area
-		velocity = - position.direction_to(raio.global_position) * 350
-		rotate = true
-		modulate = Color.BLACK
-		$Timer_die.start()
-	if is_in_group("fogo"):
-		print("ai ta quente")
+func _start_fire():
+	if in_panic: return
+	$CPUParticles2D.emitting = true
+	modulate = Color.RED
+	_burn_die()
 
-
-func _on_timer_die_timeout():
+func _burn_die():
+	if in_panic: return
+	in_panic=true
+	_on_timer_timeout()
+	get_tree().create_timer(randf_range(4.0, 8.0)).timeout.connect(queue_free)
+func _on_timer_die_timeout() -> void:
 	queue_free()

@@ -6,6 +6,10 @@ var diry = [-25, 25, 0, 0]
 var rotate = false
 var raio = null
 
+func _ready() -> void:
+	add_to_group("mobs")
+
+
 func _physics_process(_delta):
 	if rotate == true:
 		rotation_degrees += 10
@@ -32,15 +36,12 @@ func _on_timer_timeout():
 	var final_diry = DIRECTIONy
 	velocity.x = final_dirx
 	velocity.y = final_diry
-
-
-func kill():
-	queue_free()
-
+	
 
 func _on_area_2d_ovelha_area_entered(area):
 	if area.name == "Raio":
 		raio = area
-		velocity = -position.direction_to(raio.global_position) * 350
+		velocity = -position.direction_to(raio.global_position) * 400
 		rotate = true
 		modulate = Color.BLACK
+		

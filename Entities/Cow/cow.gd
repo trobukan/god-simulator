@@ -6,6 +6,9 @@ var diry = [-10,10, 0, 0, 0, 0, 0]
 var raio = null
 var rotate = false
 
+func _ready():
+	Global.kill_all.connect(kill)
+
 func _physics_process(delta):
 	if rotate == true:
 		rotation_degrees += 25

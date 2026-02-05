@@ -18,6 +18,10 @@ config/name="god simulator"
 run/main_scene="uid://d0oli6y0si0dm"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+Global="*uid://bwwrdmtxwqx82"
+
 [display]
 
 window/size/viewport_width=600
@@ -28,7 +32,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
+enabled=PackedStringArray()
 
 [layer_names]
 

@@ -24,30 +24,52 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Porco" type="CharacterBody2D" groups=["porco"]]
+[sub_resource type="Gradient" id="Gradient_xk0ew"]
+interpolation_mode = 2
+colors = PackedColorArray(0.486726, 0.486726, 0.486726, 1, 1, 1, 1, 1)
+
+[node name="Porco" type="CharacterBody2D" unique_id=485270285 groups=["porco"]]
 script = ExtResource("1_7rcdx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1964035631]
 position = Vector2(-1, 6)
 shape = SubResource("CircleShape2D_tp87e")
 
-[node name="Area2D_porco" type="Area2D" parent="."]
+[node name="Area2D_porco" type="Area2D" parent="." unique_id=435631630]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_porco"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_porco" unique_id=1938445857]
 position = Vector2(-1, 6)
 shape = SubResource("CircleShape2D_l7hc0")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=865675646]
 texture_filter = 3
 sprite_frames = SubResource("SpriteFrames_vjjed")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=390996076]
 wait_time = 4.0
 autostart = true
 
-[node name="Timer_die" type="Timer" parent="."]
+[node name="Timer_die" type="Timer" parent="." unique_id=218770102]
 wait_time = 0.7
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1419684137]
+modulate = Color(1, 0.42352942, 0, 0.67058825)
+position = Vector2(-1, 3)
+emitting = false
+amount = 13
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector2(0, -25)
+angular_velocity_max = 5.0
+radial_accel_max = 6.0
+damping_max = 10.0
+angle_max = 6.0
+scale_amount_min = 3.0
+scale_amount_max = 6.0
+color = Color(0.988235, 0.266667, 0.305882, 1)
+color_ramp = SubResource("Gradient_xk0ew")
 
 [connection signal="area_entered" from="Area2D_porco" to="." method="_on_area_2d_porco_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -5,6 +5,9 @@ var shake_amplitude = 6.0
 var shake_timer = 0.0
 var original_position = Vector2.ZERO
 
+func _ready() -> void:
+	Global.kill_all.connect(shake)
+
 func shake():
 	shake_timer = shake_duration
 

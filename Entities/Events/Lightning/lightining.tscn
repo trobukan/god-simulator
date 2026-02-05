@@ -27,20 +27,20 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Raio" type="Area2D"]
+[node name="Raio" type="Area2D" unique_id=1568575455]
 script = ExtResource("1_7k5xk")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=692293318]
 shape = SubResource("CircleShape2D_ybfpt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=63612844]
 texture_filter = 3
 position = Vector2(-4, -284)
 sprite_frames = SubResource("SpriteFrames_tg7iv")
 autoplay = "default"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=431700810]
 wait_time = 0.5
 one_shot = true
 autostart = true

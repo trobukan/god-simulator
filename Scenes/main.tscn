@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://d0oli6y0si0dm"]
 
-[ext_resource type="PackedScene" uid="uid://dfaqah7l0v4tx" path="res://Scenes/options.tscn" id="1_2vics"]
 [ext_resource type="PackedScene" uid="uid://dm7d1ib3juwea" path="res://Scenes/spawner.tscn" id="1_261po"]
 [ext_resource type="Script" uid="uid://b6sql2fwoslpt" path="res://Scripts/main.gd" id="1_t1snp"]
 [ext_resource type="Shader" uid="uid://jblofnmuscyh" path="res://Assets/Shaders/Pixalate.gdshader" id="2_d1j01"]
 [ext_resource type="PackedScene" uid="uid://qhtuglxkc0ad" path="res://Scenes/mouse.tscn" id="2_wwrsi"]
 [ext_resource type="Texture2D" uid="uid://bpmy0u0yhiwq0" path="res://Assets/Sprites/Flowers/tile_flo.png" id="6_io4jg"]
+[ext_resource type="AudioStream" uid="uid://d27wm4s3v4vix" path="res://Assets/Sounds/click.wav" id="7_d1ilt"]
+[ext_resource type="AudioStream" uid="uid://l3456uqq6xvy" path="res://Assets/Sounds/kill.wav" id="8_6iyac"]
+[ext_resource type="Script" uid="uid://d26wcbisc0cts" path="res://Scripts/buttons.gd" id="8_hptm8"]
 [ext_resource type="Script" uid="uid://cf46qdvfft3mr" path="res://Scripts/camera.gd" id="8_p7pqx"]
+[ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://Minecraft.ttf" id="9_fdnlq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6bp64"]
 
@@ -71,6 +74,7 @@ layer_0/tile_data = PackedInt32Array(2293792, 196608, 1, 2228255, 196608, 1, 222
 [node name="Spawner" parent="." unique_id=1802897892 instance=ExtResource("1_261po")]
 
 [node name="Shader" type="ColorRect" parent="." unique_id=655042772]
+visible = false
 z_index = 80
 material = SubResource("ShaderMaterial_6ch47")
 offset_left = -29.0
@@ -81,8 +85,79 @@ metadata/_edit_lock_ = true
 
 [node name="Mouse" parent="." unique_id=1124957648 instance=ExtResource("2_wwrsi")]
 
-[node name="Menu" parent="." unique_id=113814405 instance=ExtResource("1_2vics")]
+[node name="Menu" type="Node2D" parent="." unique_id=113814405]
+z_index = 100
 position = Vector2(-7, 0)
+
+[node name="Audios" type="Node2D" parent="Menu" unique_id=1396967656]
+
+[node name="Click" type="AudioStreamPlayer" parent="Menu/Audios" unique_id=73004962]
+stream = ExtResource("7_d1ilt")
+
+[node name="Kill" type="AudioStreamPlayer2D" parent="Menu/Audios" unique_id=857448285]
+stream = ExtResource("8_6iyac")
+
+[node name="Buttons" type="GridContainer" parent="Menu" unique_id=749657343]
+texture_filter = 3
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 240.0
+offset_bottom = 91.0
+columns = 4
+script = ExtResource("8_hptm8")
+
+[node name="Duck" type="Button" parent="Menu/Buttons" unique_id=1812696142]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "duck"
+
+[node name="Pig" type="Button" parent="Menu/Buttons" unique_id=1325193103]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "pig"
+
+[node name="Human" type="Button" parent="Menu/Buttons" unique_id=31987437]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "human"
+
+[node name="Cow" type="Button" parent="Menu/Buttons" unique_id=1441839656]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "cow"
+
+[node name="Lightning" type="Button" parent="Menu/Buttons" unique_id=1201033075]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "raio"
+
+[node name="KillAll" type="Button" parent="Menu/Buttons" unique_id=847278113]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "matar"
+
+[node name="Sheep" type="Button" parent="Menu/Buttons" unique_id=605246432]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "ovelha"
+
+[node name="Fire" type="Button" parent="Menu/Buttons" unique_id=2059518218]
+texture_filter = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "fogo"
+
+[node name="Grab" type="Button" parent="Menu/Buttons" unique_id=29463214]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_fdnlq")
+text = "hold"
 
 [node name="Coliders" type="Node2D" parent="." unique_id=1410521231]
 metadata/_edit_lock_ = true
