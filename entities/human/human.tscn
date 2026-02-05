@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://ctui3vbuccdu7" path="res://entities/human/human.gd" id="1_pqirf"]
 [ext_resource type="Texture2D" uid="uid://dj1opg5yv7qgg" path="res://entities/human/Sprites/human1.png" id="1_rnvww"]
 [ext_resource type="Texture2D" uid="uid://dtejy3kqt0g8a" path="res://entities/human/Sprites/human2.png" id="2_i6xip"]
+[ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="2_xqkox"]
+[ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="4_0p7jj"]
+[ext_resource type="Script" uid="uid://3l7rr2bf6te8" path="res://scripts/states/animal/animal_idle.gd" id="5_xqkox"]
+[ext_resource type="Script" uid="uid://brqu26qskibey" path="res://scripts/states/animal/animal_walk.gd" id="6_guxdx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_caag1"]
 radius = 4.5
@@ -24,8 +28,17 @@ animations = [{
 
 [node name="Human" type="CharacterBody2D" unique_id=1342337215]
 z_index = -99
-scale = Vector2(2, 2)
 script = ExtResource("1_pqirf")
+
+[node name="StateLabel" type="Label" parent="." unique_id=1332083727]
+z_index = 100
+z_as_relative = false
+offset_left = -19.0
+offset_top = -37.0
+offset_right = 20.0
+offset_bottom = -21.0
+theme_override_fonts/font = ExtResource("2_xqkox")
+text = "state"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=602873816]
 position = Vector2(0, 1)
@@ -33,5 +46,18 @@ shape = SubResource("CapsuleShape2D_caag1")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=67730440]
 texture_filter = 3
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_oy178")
 autoplay = "default"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1059038030]
+script = ExtResource("4_0p7jj")
+metadata/_custom_type_script = "uid://bptpvd4isfbfx"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=353889962]
+script = ExtResource("5_xqkox")
+metadata/_custom_type_script = "uid://3l7rr2bf6te8"
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=255894473]
+script = ExtResource("6_guxdx")
+metadata/_custom_type_script = "uid://brqu26qskibey"

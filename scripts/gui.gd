@@ -25,7 +25,7 @@ func _ready():
 	for button in buttons:
 		buttons[button].pressed.connect(select_event.bind(button))
 	
-	menu_selection.mouse_entered.connect(func(): mouse_filter =Control.MOUSE_FILTER_STOP)
+	menu_selection.mouse_entered.connect(func(): mouse_filter = Control.MOUSE_FILTER_STOP)
 	menu_selection.mouse_exited.connect(func(): mouse_filter = Control.MOUSE_FILTER_PASS)
 		
 func _process(_delta: float) -> void:

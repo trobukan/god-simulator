@@ -19,6 +19,6 @@ func physics_update(_delta: float) -> void:
 		animal.velocity = move_direction * speed
 
 func randomize_walk():
-	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1))
+	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	walk_time = randf_range(1.0, 2.0)
 	

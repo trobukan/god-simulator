@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://duqgis7hhus0w" path="res://entities/sheep/sheep.gd" id="1_q3n3c"]
 [ext_resource type="Texture2D" uid="uid://bg5po60wdwru2" path="res://entities/sheep/Sprites/ovelha1.png" id="2_2ja3b"]
+[ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="2_a0hgy"]
 [ext_resource type="Texture2D" uid="uid://cs7tc8khkyfr8" path="res://entities/sheep/Sprites/ovelha2.png" id="3_2ufq3"]
+[ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="5_ph5w8"]
+[ext_resource type="Script" uid="uid://3l7rr2bf6te8" path="res://scripts/states/animal/animal_idle.gd" id="6_v5fba"]
+[ext_resource type="Script" uid="uid://brqu26qskibey" path="res://scripts/states/animal/animal_walk.gd" id="7_tklyc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kmoyl"]
 animations = [{
@@ -21,29 +25,35 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_drytq"]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0n4p5"]
-radius = 12.0
-
-[node name="Ovelha" type="CharacterBody2D" unique_id=638473245]
+[node name="Sheep" type="CharacterBody2D" unique_id=638473245]
 script = ExtResource("1_q3n3c")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175058799]
+[node name="StateLabel" type="Label" parent="." unique_id=1814050162]
+z_index = 100
+z_as_relative = false
+offset_left = -19.0
+offset_top = -37.0
+offset_right = 20.0
+offset_bottom = -21.0
+theme_override_fonts/font = ExtResource("2_a0hgy")
+text = "state"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=175058799]
 texture_filter = 3
 sprite_frames = SubResource("SpriteFrames_kmoyl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1027402717]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1027402717]
 position = Vector2(-1, 6)
 shape = SubResource("CircleShape2D_drytq")
 
-[node name="Timer" type="Timer" parent="." unique_id=1210312706]
-wait_time = 4.0
-autostart = true
+[node name="StateMachine" type="Node" parent="." unique_id=78269020]
+script = ExtResource("5_ph5w8")
+metadata/_custom_type_script = "uid://bptpvd4isfbfx"
 
-[node name="Area2D_ovelha" type="Area2D" parent="." unique_id=1544669191]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1211991204]
+script = ExtResource("6_v5fba")
+metadata/_custom_type_script = "uid://3l7rr2bf6te8"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_ovelha" unique_id=1973475307]
-position = Vector2(-1, 6)
-shape = SubResource("CircleShape2D_0n4p5")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="area_entered" from="Area2D_ovelha" to="." method="_on_area_2d_ovelha_area_entered"]
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1064339226]
+script = ExtResource("7_tklyc")
+metadata/_custom_type_script = "uid://brqu26qskibey"

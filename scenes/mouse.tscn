@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://debpwhijcd2tv" path="res://scripts/mouse.gd" id="1_iog6k"]
 [ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="3_xa71f"]
 [ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="4_j7mu1"]
-[ext_resource type="Script" uid="uid://do3cpg4bxrwjr" path="res://scripts/components/interact_component.gd" id="4_lbrf4"]
+[ext_resource type="Script" path="res://scripts/components/interact_component.gd" id="4_lbrf4"]
 [ext_resource type="Script" uid="uid://ct6tje4e0ff05" path="res://scripts/states/mouse/mouse_idle.gd" id="5_j7mu1"]
 [ext_resource type="Script" uid="uid://6ukiv6kgc6hi" path="res://scripts/states/mouse/mouse_click.gd" id="6_lbrf4"]
 

@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://4bqib8a2yka0" path="res://entities/pig/pig.gd" id="1_7rcdx"]
 [ext_resource type="Texture2D" uid="uid://1t8ct44v8pnm" path="res://entities/pig/Sprites/pig1.png" id="2_4q8nd"]
+[ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="2_8q7wj"]
 [ext_resource type="Texture2D" uid="uid://xd1jeepoiddp" path="res://entities/pig/Sprites/pig2.png" id="3_5rq82"]
+[ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="4_bwg2q"]
+[ext_resource type="Script" uid="uid://3l7rr2bf6te8" path="res://scripts/states/animal/animal_idle.gd" id="5_8q7wj"]
+[ext_resource type="Script" uid="uid://brqu26qskibey" path="res://scripts/states/animal/animal_walk.gd" id="6_xcltj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tp87e"]
-radius = 8.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_l7hc0"]
 radius = 8.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vjjed"]
@@ -24,31 +25,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Porco" type="CharacterBody2D" groups=["porco"]]
+[node name="Pig" type="CharacterBody2D" unique_id=142460504]
 script = ExtResource("1_7rcdx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="StateLabel" type="Label" parent="." unique_id=1766987448]
+z_index = 100
+z_as_relative = false
+offset_left = -18.0
+offset_top = -31.0
+offset_right = 21.0
+offset_bottom = -15.0
+theme_override_fonts/font = ExtResource("2_8q7wj")
+text = "state"
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=409295089]
 position = Vector2(-1, 6)
 shape = SubResource("CircleShape2D_tp87e")
 
-[node name="Area2D_porco" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_porco"]
-position = Vector2(-1, 6)
-shape = SubResource("CircleShape2D_l7hc0")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=747531800]
 texture_filter = 3
 sprite_frames = SubResource("SpriteFrames_vjjed")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
+[node name="StateMachine" type="Node" parent="." unique_id=2053739950]
+script = ExtResource("4_bwg2q")
+metadata/_custom_type_script = "uid://bptpvd4isfbfx"
 
-[node name="Timer_die" type="Timer" parent="."]
-wait_time = 0.7
-one_shot = true
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1834073828]
+script = ExtResource("5_8q7wj")
+metadata/_custom_type_script = "uid://3l7rr2bf6te8"
 
-[connection signal="area_entered" from="Area2D_porco" to="." method="_on_area_2d_porco_area_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer_die" to="." method="_on_timer_die_timeout"]
+[node name="Walk" type="Node" parent="StateMachine" unique_id=2030105652]
+script = ExtResource("6_xcltj")
+metadata/_custom_type_script = "uid://brqu26qskibey"
