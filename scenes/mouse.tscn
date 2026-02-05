@@ -1,34 +1,53 @@
 [gd_scene format=3 uid="uid://c52ysy5x4wic"]
 
 [ext_resource type="Texture2D" uid="uid://cv1gsrwe4mx54" path="res://assets/sprites/hud/hand.png" id="1_8f81w"]
-[ext_resource type="Script" uid="uid://uhw0ych78anv" path="res://scripts/mouse.gd" id="1_a7hef"]
+[ext_resource type="Script" uid="uid://debpwhijcd2tv" path="res://scripts/mouse.gd" id="1_iog6k"]
 [ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="3_xa71f"]
+[ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="4_j7mu1"]
+[ext_resource type="Script" uid="uid://do3cpg4bxrwjr" path="res://scripts/components/interact_component.gd" id="4_lbrf4"]
+[ext_resource type="Script" uid="uid://ct6tje4e0ff05" path="res://scripts/states/mouse/mouse_idle.gd" id="5_j7mu1"]
+[ext_resource type="Script" uid="uid://6ukiv6kgc6hi" path="res://scripts/states/mouse/mouse_click.gd" id="6_lbrf4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ouscy"]
+radius = 14.0
 
-[node name="Mouse" type="Node2D" unique_id=554030695]
+[node name="Mouse" type="Node2D" unique_id=554030695 node_paths=PackedStringArray("interaction_component")]
 z_index = 101
-script = ExtResource("1_a7hef")
+script = ExtResource("1_iog6k")
+interaction_component = NodePath("InteractComponent")
+
+[node name="StateLabel" type="Label" parent="." unique_id=1665889008]
+z_index = 100
+offset_left = -18.0
+offset_top = -34.0
+offset_right = 22.0
+offset_bottom = -11.0
+theme_override_fonts/font = ExtResource("3_xa71f")
+text = "State"
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1589290162]
-position = Vector2(1, 23)
+position = Vector2(0, 11)
 scale = Vector2(2, 2)
 texture = ExtResource("1_8f81w")
-offset = Vector2(0, -2)
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="." unique_id=140562788]
+[node name="InteractComponent" type="Area2D" parent="." unique_id=140562788]
+unique_name_in_owner = true
+script = ExtResource("4_lbrf4")
 
-[node name="Collision" type="CollisionShape2D" parent="Area2D" unique_id=495627911]
-position = Vector2(1, 1)
+[node name="Collision" type="CollisionShape2D" parent="InteractComponent" unique_id=495627911]
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_ouscy")
 
-[node name="StateLabel" type="Label" parent="." unique_id=1815812977]
-offset_left = 14.0
-offset_top = 2.0
-offset_right = 53.0
-offset_bottom = 18.0
-theme_override_fonts/font = ExtResource("3_xa71f")
-text = "state"
+[node name="StateMachine" type="Node" parent="." unique_id=497490016 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_j7mu1")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bptpvd4isfbfx"
 
-[node name="GrabTimer" type="Timer" parent="." unique_id=318296466]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=446255575]
+script = ExtResource("5_j7mu1")
+metadata/_custom_type_script = "uid://ct6tje4e0ff05"
+
+[node name="Click" type="Node" parent="StateMachine" unique_id=125416584]
+script = ExtResource("6_lbrf4")
+metadata/_custom_type_script = "uid://6ukiv6kgc6hi"

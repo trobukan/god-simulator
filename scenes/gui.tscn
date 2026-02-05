@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dvlygua05ur0p" path="res://scripts/gui.gd" id="1_b8iy7"]
 [ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="1_ynd5l"]
-[ext_resource type="PackedScene" uid="uid://c52ysy5x4wic" path="res://scenes/mouse.tscn" id="2_b8iy7"]
 [ext_resource type="Shader" uid="uid://jblofnmuscyh" path="res://assets/shaders/pixel.gdshader" id="2_jqlde"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_08a8y"]
@@ -39,9 +38,6 @@ offset_bottom = 88.0
 theme_override_fonts/font = ExtResource("1_ynd5l")
 theme_override_font_sizes/font_size = 16
 text = "Current"
-
-[node name="Mouse" parent="." unique_id=554030695 instance=ExtResource("2_b8iy7")]
-position = Vector2(-104, -98)
 
 [node name="MenuSelection" type="Control" parent="." unique_id=1739156630]
 z_index = 100

@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://dq0wkpwgqju2i" path="res://entities/duck/duck.gd" id="1_jqnw0"]
 [ext_resource type="Texture2D" uid="uid://cwqe33iidko81" path="res://entities/duck/Sprites/duck1.png" id="1_tje5r"]
 [ext_resource type="Texture2D" uid="uid://d14y48k11ud4w" path="res://entities/duck/Sprites/duck2.png" id="2_jhdox"]
-[ext_resource type="Script" uid="uid://0atjqsnj8tuo" path="res://scripts/components/health_component.gd" id="4_jr881"]
-[ext_resource type="Script" uid="uid://wqfut3buv5q2" path="res://scripts/components/grab_component.gd" id="5_x2kt5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70nd8"]
 radius = 7.07107
@@ -28,7 +26,7 @@ z_index = -99
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_jqnw0")
-health_component = NodePath("HealthComponent")
+health_component = NodePath("")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=202838317]
 shape = SubResource("CircleShape2D_70nd8")
@@ -38,16 +36,3 @@ texture_filter = 3
 sprite_frames = SubResource("SpriteFrames_yyand")
 animation = &"walking"
 autoplay = "walking"
-
-[node name="HealthComponent" type="Node" parent="." unique_id=1246300204]
-unique_name_in_owner = true
-script = ExtResource("4_jr881")
-metadata/_custom_type_script = "uid://0atjqsnj8tuo"
-
-[node name="GrabComponent" type="Area2D" parent="." unique_id=1927712542]
-unique_name_in_owner = true
-script = ExtResource("5_x2kt5")
-metadata/_custom_type_script = "uid://wqfut3buv5q2"
-
-[node name="Collision" type="CollisionShape2D" parent="GrabComponent" unique_id=790944462]
-shape = SubResource("CircleShape2D_70nd8")
