@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1w2ydj1rpm7w" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="Script" uid="uid://cf46qdvfft3mr" path="res://scripts/camera.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://c52ysy5x4wic" path="res://scenes/mouse.tscn" id="2_k0juu"]
 [ext_resource type="Script" uid="uid://c7b32b1b3tcb6" path="res://scenes/spawn_entity.gd" id="3_4wyf3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btjax"]
@@ -9,6 +10,9 @@ size = Vector2(21, 602)
 
 [node name="World" type="Node2D" unique_id=295249712]
 script = ExtResource("1_4wyf3")
+
+[node name="Mouse" parent="." unique_id=554030695 instance=ExtResource("2_k0juu")]
+position = Vector2(96, 80)
 
 [node name="Camera" type="Camera2D" parent="." unique_id=2084411375]
 anchor_mode = 0
