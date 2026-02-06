@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="2_lj7cn"]
 [ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="4_cr6v7"]
 [ext_resource type="Script" uid="uid://3l7rr2bf6te8" path="res://scripts/states/animal/animal_idle.gd" id="5_8bpxb"]
+[ext_resource type="Script" uid="uid://ccqck7i6bjiq1" path="res://scripts/components/hitbox_component.gd" id="5_muwkk"]
 [ext_resource type="Script" uid="uid://brqu26qskibey" path="res://scripts/states/animal/animal_walk.gd" id="6_lj7cn"]
+[ext_resource type="Script" uid="uid://0atjqsnj8tuo" path="res://scripts/components/health_component.gd" id="6_sh0jw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70nd8"]
 radius = 7.07107
@@ -25,11 +27,26 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Duck" type="CharacterBody2D" unique_id=1431350416]
+[sub_resource type="CircleShape2D" id="CircleShape2D_xls2v"]
+radius = 8.0
+
+[node name="Duck" type="CharacterBody2D" unique_id=1431350416 node_paths=PackedStringArray("health_component", "hitbox_component")]
 z_index = -99
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_jqnw0")
+health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=2093408972]
+z_index = 100
+z_as_relative = false
+offset_left = -18.0
+offset_top = -47.0
+offset_right = 28.0
+offset_bottom = -31.0
+theme_override_fonts/font = ExtResource("2_lj7cn")
+text = "health"
 
 [node name="StateLabel" type="Label" parent="." unique_id=426263117]
 z_index = 100
@@ -49,6 +66,22 @@ texture_filter = 3
 sprite_frames = SubResource("SpriteFrames_yyand")
 animation = &"walking"
 autoplay = "walking"
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=724452535]
+unique_name_in_owner = true
+script = ExtResource("5_muwkk")
+metadata/_custom_type_script = "uid://ccqck7i6bjiq1"
+
+[node name="Collision" type="CollisionShape2D" parent="HitboxComponent" unique_id=327279761]
+position = Vector2(-1, 6)
+shape = SubResource("CircleShape2D_xls2v")
+disabled = true
+
+[node name="HealthComponent" type="Node" parent="." unique_id=203734697]
+unique_name_in_owner = true
+script = ExtResource("6_sh0jw")
+max_health = 2
+metadata/_custom_type_script = "uid://0atjqsnj8tuo"
 
 [node name="StateMachine" type="Node" parent="." unique_id=53465057]
 script = ExtResource("4_cr6v7")

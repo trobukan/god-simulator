@@ -5,7 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://dtejy3kqt0g8a" path="res://entities/human/Sprites/human2.png" id="2_i6xip"]
 [ext_resource type="FontFile" uid="uid://c4bv2aqqam07a" path="res://assets/fonts/minecraft.ttf" id="2_xqkox"]
 [ext_resource type="Script" uid="uid://bptpvd4isfbfx" path="res://scripts/states/state_machine.gd" id="4_0p7jj"]
+[ext_resource type="Script" uid="uid://ccqck7i6bjiq1" path="res://scripts/components/hitbox_component.gd" id="5_ujme2"]
 [ext_resource type="Script" uid="uid://3l7rr2bf6te8" path="res://scripts/states/animal/animal_idle.gd" id="5_xqkox"]
+[ext_resource type="Script" uid="uid://0atjqsnj8tuo" path="res://scripts/components/health_component.gd" id="6_6mky1"]
 [ext_resource type="Script" uid="uid://brqu26qskibey" path="res://scripts/states/animal/animal_walk.gd" id="6_guxdx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_caag1"]
@@ -26,17 +28,32 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Human" type="CharacterBody2D" unique_id=1342337215]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s170t"]
+radius = 8.0
+
+[node name="Human" type="CharacterBody2D" unique_id=1342337215 node_paths=PackedStringArray("health_component", "hitbox_component")]
 z_index = -99
 script = ExtResource("1_pqirf")
+health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=1882825687]
+z_index = 100
+z_as_relative = false
+offset_left = -16.0
+offset_top = -48.0
+offset_right = 30.0
+offset_bottom = -32.0
+theme_override_fonts/font = ExtResource("2_xqkox")
+text = "health"
 
 [node name="StateLabel" type="Label" parent="." unique_id=1332083727]
 z_index = 100
 z_as_relative = false
-offset_left = -19.0
-offset_top = -37.0
-offset_right = 20.0
-offset_bottom = -21.0
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 23.0
+offset_bottom = -16.0
 theme_override_fonts/font = ExtResource("2_xqkox")
 text = "state"
 
@@ -49,6 +66,22 @@ texture_filter = 3
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_oy178")
 autoplay = "default"
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1258310069]
+unique_name_in_owner = true
+script = ExtResource("5_ujme2")
+metadata/_custom_type_script = "uid://ccqck7i6bjiq1"
+
+[node name="Collision" type="CollisionShape2D" parent="HitboxComponent" unique_id=1080736281]
+position = Vector2(-1, 6)
+shape = SubResource("CircleShape2D_s170t")
+disabled = true
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1781049182]
+unique_name_in_owner = true
+script = ExtResource("6_6mky1")
+max_health = 10
+metadata/_custom_type_script = "uid://0atjqsnj8tuo"
 
 [node name="StateMachine" type="Node" parent="." unique_id=1059038030]
 script = ExtResource("4_0p7jj")
